@@ -1,0 +1,22 @@
+{
+  "Probes": [
+    {
+      "ID": 1,
+      "Type": "ICMP",
+      "IPAddr": "1.1.1.1",
+      "Frequency": 5
+    },
+    {
+      "ID": 2,
+      "Type": "ICMP",
+      "IPAddr": "93.89.199.22",
+      "Frequency": 1
+    },
+    {
+      "ID": 3,
+      "Type": "ICMP",
+      "IPAddr": "212.77.98.9",
+      "Frequency": 2
+    }
+  ]
+}
