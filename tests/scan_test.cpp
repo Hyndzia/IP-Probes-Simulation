@@ -47,11 +47,29 @@ void scan_ports(uint32_t startVal, uint32_t endVal, const std::string& hostname)
     std::cout<<"\n\n Scanning completed in "<<seconds<<" s!"<<std::endl;
 }
 
+std::string resolve_dns(const std::string& hostname) {
+    try {
+        boost::asio::io_context io_context;
+        boost::asio::ip::tcp::resolver resolver(io_context);
+        boost::asio::ip::tcp::resolver::results_type endpoints = resolver.resolve(hostname, "");
+
+        for (const auto& endpoint : endpoints) {
+            if (endpoint.endpoint().address().is_v4()) {
+                return endpoint.endpoint().address().to_string();
+            }
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
+    return "";
+}
+
 int main(){
-    std::string hostname;
+    char host[100]; std::string hostname;
     uint32_t start; uint32_t end;
-    std::cout<<"Enter host IP address: "<<std::endl;
-    std::cin>>hostname;
+    std::cout<<"Enter hostname"<<std::endl;
+    scanf("%s", &host); //cin doesnt work when entering host
+    hostname = resolve_dns(host);
     std::cout<<"Enter starting point: ";
     std::cin>>start;
     std::cout<<"\n\n";
