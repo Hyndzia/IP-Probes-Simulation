@@ -2,7 +2,7 @@
 #include <boost/asio.hpp>
 #include <chrono>
 
-bool is_port_open(const std::string& hostname, uint32_t port) {
+bool is_port_open(const std::string& hostname, uint16_t port) {
     boost::asio::io_context io_context;
     boost::asio::ip::tcp::socket socket(io_context);
     boost::asio::deadline_timer timer(io_context);
@@ -33,7 +33,7 @@ bool is_port_open(const std::string& hostname, uint32_t port) {
     return flag;
 }
 
-void scan_ports(uint32_t startVal, uint32_t endVal, const std::string& hostname){
+void scan_ports(uint16_t startVal, uint16_t endVal, const std::string& hostname){
     bool x;
     std::cout<<"Scanning ports on "<<hostname<<"...."<<std::endl;
     auto t1 = std::chrono::high_resolution_clock::now();
@@ -66,7 +66,7 @@ std::string resolve_dns(const std::string& hostname) {
 
 int main(){
     char host[100]; std::string hostname;
-    uint32_t start; uint32_t end;
+    uint16_t start; uint16_t end;
     std::cout<<"Enter hostname"<<std::endl;
     scanf("%s", &host); //cin doesnt work when entering host
     hostname = resolve_dns(host);
